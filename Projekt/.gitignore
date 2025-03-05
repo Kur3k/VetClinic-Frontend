@@ -1,0 +1,83 @@
+# Visual Studio pliki
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Pliki binarne i wynikowe
+bin/
+obj/
+debug/
+release/
+TestResults/
+
+# Pliki konfiguracji
+*.config
+*.vssettings
+*.ruleset
+
+# Wygenerowane dane
+*.log
+*.cache
+*.pdb
+*.ilk
+*.idb
+*.tlog
+*.lastbuildstate
+*.scc
+
+# Pliki zbudowane
+*.dll
+*.exe
+*.lib
+*.ocx
+*.so
+*.jar
+*.nuspec
+*.nupkg
+
+# Pliki tymczasowe
+*.tmp
+*.diff
+*.patch
+*.csv
+*.out
+*.err
+
+# Logi i bazy danych
+*.log
+*.sql
+*.sqlite
+
+# Dane aplikacji
+*.db
+*.bak
+
+# System plików
+desktop.ini
+Thumbs.db
+ehthumbs.db
+
+# Pliki narzędzi
+_ReSharper*
+*.DotSettings.user
+*.resharper
+
+# Pliki NuGet
+*.nupkg
+packages/
+project.lock.json
+project.fragment.lock.json
+
+# Pliki publikacji
+publish/
+*.publish.xml
+
+# Skrypty automatyczne
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Pliki tymczasowe edytora
+~$*

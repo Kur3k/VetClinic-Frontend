@@ -1,0 +1,93 @@
+﻿<Window x:Class="Projekt.View.ChangePetWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:Projekt.ViewModel" 
+        xmlns:local="clr-namespace:Projekt.View"
+        d:DataContext="{d:DesignInstance Type=vm:ChangePetViewModel}"
+        mc:Ignorable="d"
+        Title="Change Window" Height="600" Width="600">
+
+    <Window.Resources>
+        <!-- Styl dla zaokrąglonych przycisków -->
+        <Style x:Key="RoundedButtonStyle" TargetType="Button">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#4A90E2" Offset="0.0"/>
+                        <GradientStop Color="#9B59B6" Offset="1.0"/>
+                        
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Width" Value="300"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Padding" Value="10,0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="2" 
+                                CornerRadius="10">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Styl dla tekstów i inputów -->
+        <Style x:Key="InputStyle" TargetType="TextBox">
+            <Setter Property="Margin" Value="10,5"/>
+            <Setter Property="Padding" Value="10,0"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+
+        <Style x:Key="ComboBoxStyle" TargetType="ComboBox">
+            <Setter Property="Margin" Value="10,5"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+
+        <Style x:Key="LabelStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Margin" Value="10,5"/>
+        </Style>
+    </Window.Resources>
+
+    <StackPanel Margin="20">
+
+        <Label Content="Name" Style="{StaticResource LabelStyle}"/>
+        <TextBox Text="{Binding Name}" Style="{StaticResource InputStyle}"/>
+
+        <Label Content="Species" Style="{StaticResource LabelStyle}"/>
+        <TextBox Text="{Binding Species}" Style="{StaticResource InputStyle}"/>
+
+        <Label Content="Gender" Style="{StaticResource LabelStyle}"/>
+        <ComboBox Text="{Binding Gender}" Style="{StaticResource ComboBoxStyle}">
+            <ComboBoxItem Content="Male"/>
+            <ComboBoxItem Content="Female"/>
+            <ComboBoxItem Content="Hermaphrodite"/>
+        </ComboBox>
+
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Year Of Birth" Style="{StaticResource LabelStyle}"/>
+            <Calendar Margin="10,0" DisplayDate="{Binding YearOfBirth, StringFormat='d'}" />
+        </StackPanel>
+        
+        <Label Content="Owner" Style="{StaticResource LabelStyle}"/>
+        <ComboBox Name="cbxOwners" ItemsSource="{Binding OwnerList}"  SelectedItem="{Binding Owner, Mode=TwoWay}"/>
+
+        <Button Style="{StaticResource RoundedButtonStyle}" 
+                Command="{Binding AddPetCommand}" 
+                Content="Save" 
+                Margin="10,10"/>
+
+    </StackPanel>
+</Window>
