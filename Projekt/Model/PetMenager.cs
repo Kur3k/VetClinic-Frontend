@@ -1,9 +1,8 @@
-﻿using RestSharp;
-using System.Collections.ObjectModel;
-using System.Net.Http;
-using Newtonsoft.Json;
-using System.Text.Json;
+﻿using Newtonsoft.Json;
+using RestSharp;
 using RestSharp.Serializers.Json;
+using System.Net.Http;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Projekt.Model;

@@ -1,6 +1,4 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using System;
-using System.Linq;
 using System.Windows;
 
 namespace Projekt.Model;

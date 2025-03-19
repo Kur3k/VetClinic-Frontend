@@ -1,7 +1,5 @@
-﻿using Projekt.Model;
-using Projekt.ViewModel;
+﻿using Projekt.ViewModel;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace Projekt;
 

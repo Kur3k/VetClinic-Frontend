@@ -2,10 +2,6 @@
 using CommunityToolkit.Mvvm.Input;
 using Projekt.Model;
 using System.Windows.Input;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Windows.Controls;
 
 namespace Projekt.ViewModel
 {
