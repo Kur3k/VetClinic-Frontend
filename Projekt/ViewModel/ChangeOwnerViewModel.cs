@@ -7,8 +7,6 @@ namespace Projekt.ViewModel
 {
     public class ChangeOwnerViewModel : ObservableObject
     {
-        private OwnerManager _ownerManager = new();
-
         public string Country {  get; set; }
         public string City { get; set; }
         public string HouseNumber { get; set; }
@@ -18,21 +16,18 @@ namespace Projekt.ViewModel
         public string? PhoneNumber { get; set; }
         public int Id { get; set; }
 
-        private List<string> _countries = new List<string>();
         public List<string> CountriesList
         {
             get => _countries;
             set => SetProperty(ref _countries, value);
         }
 
-        private string? _selectedCountry; 
         public string? SelectedCountry
         {
             get => _selectedCountry;
             set => SetProperty(ref _selectedCountry, value);
         }
 
-        private Owner _owner = new Owner();
         public Owner Owner
         {
             get => _owner;
@@ -95,11 +90,21 @@ namespace Projekt.ViewModel
             }
         });
 
+        public async Task GetCountries()
+        {
+            CountriesList = Countries.ListCountries;
+        }
+
+        public ICommand ViewLoadedCommand => new RelayCommand(async () =>
+        {
+            await GetCountries();
+        });
+
         private bool ValidateAddress()
         {
             if (string.IsNullOrWhiteSpace(Street) ||
-                string.IsNullOrWhiteSpace(City)||
-                string.IsNullOrWhiteSpace(Country)||
+                string.IsNullOrWhiteSpace(City) ||
+                string.IsNullOrWhiteSpace(Country) ||
                 string.IsNullOrWhiteSpace(HouseNumber))
             {
                 return false;
@@ -108,14 +113,9 @@ namespace Projekt.ViewModel
             return true;
         }
 
-        public async Task GetCountries()
-        {
-            CountriesList = Countries.ListCountries;
-        }
-
-        public ChangeOwnerViewModel()//dodane
-        {
-            Task.Run(async () => await GetCountries()); 
-        }
+        private List<string> _countries = new List<string>();
+        private OwnerManager _ownerManager = new();
+        private Owner _owner = new();
+        private string? _selectedCountry;
     }
 }

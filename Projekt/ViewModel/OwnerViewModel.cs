@@ -10,8 +10,6 @@ namespace Projekt.ViewModel;
 
 class OwnerViewModel : ObservableObject
 {
-    private ObservableCollection<Owner> _owners = new();
-
     public ObservableCollection<Owner> Owners
     {
         get => _owners;
@@ -23,18 +21,18 @@ class OwnerViewModel : ObservableObject
     public async Task LoadOwner()
     {
         var ownerMenagrer = new OwnerManager();
-        var list = await ownerMenagrer.GetOwners();
+        List<Owner>? list = await ownerMenagrer.GetOwners();
         if (list is not null)
         {
             Owners = new ObservableCollection<Owner>(list);
         }
     }
 
-    public ICommand ChangeOwnerWindowCommand => new RelayCommand(() =>
+    public ICommand ChangeOwnerWindowCommand => new RelayCommand(async () =>
     {
         var changeWindow = new ChangeOwnerWindow();
         changeWindow.ShowDialog();
-        LoadOwner();
+        await LoadOwner();
     });
 
     public ICommand RemoveOwnerCommand => new RelayCommand(() =>
@@ -51,4 +49,12 @@ class OwnerViewModel : ObservableObject
             //remove owner
         }
     });
+
+    public ICommand ViewLoadedCommand => new RelayCommand(async () =>
+    {
+        await LoadOwner();
+    });
+
+    private ObservableCollection<Owner> _owners = new();
+
 }

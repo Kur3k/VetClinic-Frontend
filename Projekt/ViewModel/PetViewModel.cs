@@ -10,8 +10,6 @@ namespace Projekt.ViewModel;
 
 public class PetViewModel : ObservableObject
 {
-    private ObservableCollection<Pet> _pets;
-
     public ObservableCollection<Pet> Pets
     { 
         get => _pets; 
@@ -30,7 +28,7 @@ public class PetViewModel : ObservableObject
         }
     }
 
-    public ICommand ChangePetWindowCommand => new RelayCommand(() =>
+    public ICommand ChangePetWindowCommand => new RelayCommand(async () =>
     {
         var changeWindow = new ChangePetWindow();
 
@@ -39,7 +37,7 @@ public class PetViewModel : ObservableObject
 
         changeWindow.ShowDialog();
 
-        LoadPets();
+        await LoadPets();
     });
 
     public ICommand RemovePetCommand => new RelayCommand(() =>
@@ -60,4 +58,11 @@ public class PetViewModel : ObservableObject
         }
 
     });
+
+    public ICommand ViewLoadedCommand => new RelayCommand(async () =>
+    {
+        await LoadPets();
+    });
+
+    private ObservableCollection<Pet> _pets;
 }

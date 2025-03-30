@@ -4,14 +4,7 @@ using System.Windows;
 namespace Projekt.Model;
 
 public class Pet : ObservableObject
-{
-    private string _name = string.Empty;
-    private string _species = string.Empty;
-    private string _gender = string.Empty;
-    private DateTime _yearOfBirth;
-    private int _id;
-    private Owner _owner = new();
-    
+{    
     public int Id
     {
         get => _id;
@@ -75,4 +68,11 @@ public class Pet : ObservableObject
         get => _owner;
         set => SetProperty(ref _owner, value);
     }
+
+    private string _name = string.Empty;
+    private string _species = string.Empty;
+    private string _gender = string.Empty;
+    private DateTime _yearOfBirth;
+    private int _id;
+    private Owner _owner = new();
 }

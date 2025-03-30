@@ -11,9 +11,5 @@ public partial class ChangeOwnerWindow : Window
         InitializeComponent();
         var changeOwnerViewModel = new ChangeOwnerViewModel();
         DataContext = changeOwnerViewModel;
-        Loaded += async (s, e) =>
-        {
-            await changeOwnerViewModel.GetCountries();
-        };
     }
 }

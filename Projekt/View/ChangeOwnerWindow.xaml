@@ -4,64 +4,18 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Projekt.View"
-        xmlns:model="clr-namespace:Projekt.ViewModel" 
+        xmlns:model="clr-namespace:Projekt.ViewModel"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         Title="ChangeOwnerWindow" Height="700" Width="600">
 
-    <Window.Resources>
-        <!-- Styl dla zaokrąglonych przycisków -->
-        <Style x:Key="RoundedButtonStyle" TargetType="Button">
-            <Setter Property="Background">
-                <Setter.Value>
-                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                        <GradientStop Color="#4A90E2" Offset="0.0"/>
-                        <GradientStop Color="#9B59B6" Offset="1.0"/>
-                        
-                    </LinearGradientBrush>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="Height" Value="40"/>
-            <Setter Property="Width" Value="300"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="BorderBrush" Value="Transparent"/>
-            <Setter Property="Padding" Value="10,0"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="2" 
-                                CornerRadius="10">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <!-- Styl dla tekstów i inputów -->
-        <Style x:Key="InputStyle" TargetType="TextBox">
-            <Setter Property="Margin" Value="10,5"/>
-            <Setter Property="Padding" Value="10,0"/>
-            <Setter Property="FontSize" Value="14"/>
-        </Style>
-
-        <Style x:Key="ComboBoxStyle" TargetType="ComboBox">
-            <Setter Property="Margin" Value="10,5"/>
-            <Setter Property="FontSize" Value="14"/>
-        </Style>
-
-        <Style x:Key="LabelStyle" TargetType="Label">
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="FontWeight" Value="SemiBold"/>
-            <Setter Property="Margin" Value="10,5"/>
-        </Style>
-    </Window.Resources>
-
     <StackPanel Margin="20" VerticalAlignment="Top">
-        
+        <i:Interaction.Triggers>
+            <i:EventTrigger EventName="Loaded">
+                <i:InvokeCommandAction Command="{Binding ViewLoadedCommand}" />
+            </i:EventTrigger>
+        </i:Interaction.Triggers>
+
         <Label Content="Name" Style="{StaticResource LabelStyle}"/>
         <TextBox Text="{Binding Name}" Style="{StaticResource InputStyle}"/>
 

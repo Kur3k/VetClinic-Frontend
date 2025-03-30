@@ -8,14 +8,7 @@ namespace Projekt.View
         public OwnerWindow()
         {
             InitializeComponent();
-            var viewModel = new OwnerViewModel();
-            DataContext = viewModel;
-            Loaded += async (s, e) =>
-            {
-                await viewModel.LoadOwner();
-            };
+            DataContext = new OwnerViewModel();
         }
-
-
     }
 }

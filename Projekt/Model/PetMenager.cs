@@ -1,39 +1,19 @@
 ﻿using Newtonsoft.Json;
+using Projekt.Factory;
 using RestSharp;
-using RestSharp.Serializers.Json;
-using System.Net.Http;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace Projekt.Model;
 
 public class PetMenager
 {
-    private RestClient _restClient;
-
-    private string BaseURl = "https://localhost:7000/";
-    private string BasePetURl = "https://localhost:7000/Pet/";
-
     public PetMenager()
     {
-        var httpClient = new HttpClient();
-
-        httpClient.BaseAddress = new Uri(BaseURl);
-        _restClient = new RestClient(
-            httpClient: httpClient,
-            disposeHttpClient: true,
-            configureSerialization: s => s.UseSystemTextJson(new JsonSerializerOptions
-            {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-                Converters = { new JsonStringEnumConverter(JsonNamingPolicy.CamelCase) }
-            }),
-            configureRestClient: c => c.ThrowOnDeserializationError = true);
+        _restClient = new CustomRestClientClientFactory().CreateRestClient(_baseUrl);
     }
 
     public async Task<List<Pet>?> GetPet()
     {
-        string requestUrl = $"{BasePetURl}GetPets";
-
+        string requestUrl = $"Pet/GetPets";
 
         var response = await _restClient.GetAsync(new RestRequest(requestUrl));
 
@@ -47,7 +27,7 @@ public class PetMenager
 
     public async Task AddPet(Pet pet)
     {
-        string requestUrl = $"{BasePetURl}AddPet";
+        string requestUrl = $"Pet/AddPet";
 
         var request = new RestRequest(requestUrl, Method.Post);
         request.AddJsonBody(pet);
@@ -57,7 +37,7 @@ public class PetMenager
 
     public async Task UpdatePet(Pet pet)
     {
-        string requestUrl = $"{BasePetURl}UpdatePet/{pet.Id}"; 
+        string requestUrl = $"Pet/UpdatePet/{pet.Id}"; 
        
         var request = new RestRequest(requestUrl, Method.Put);
         request.AddJsonBody(pet);
@@ -78,10 +58,9 @@ public class PetMenager
         }
     }
 
-
     public async Task DeletePet(Pet pet)
     {
-        string requestUrl = $"{BaseURl}DeletePet/{pet.Id}";
+        string requestUrl = $"Pet/DeletePet/{pet.Id}";
 
         var response = await _restClient.DeleteAsync(new RestRequest(requestUrl));
         if (response != null && response.IsSuccessful && response.Content != null)
@@ -90,4 +69,8 @@ public class PetMenager
             
         }
     }
+
+    private RestClient _restClient;
+
+    private const string _baseUrl = "https://localhost:7000/";
 }

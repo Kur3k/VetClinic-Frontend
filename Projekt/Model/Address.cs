@@ -5,11 +5,6 @@ namespace Projekt.Model;
 
 public class Address : ObservableObject
 {
-    private string _street;
-    private string _houseNumber;
-    private string _city;
-    private string _country;
-
     public string Street
     {
         get => _street;
@@ -95,4 +90,9 @@ public class Address : ObservableObject
     {
         return $"{_street} {_houseNumber}, {_city}, {_country}";
     }
+
+    private string _street;
+    private string _houseNumber;
+    private string _city;
+    private string _country;
 }

@@ -9,9 +9,6 @@ namespace Projekt.ViewModel;
 
 public class ChangePetViewModel(Window changePetWindow) : ObservableObject
 {
-    private PetMenager _petMenager = new();
-    private OwnerManager _ownerManager = new();
-
     public string? Name { get; set; }
     public string? Species { get; set; }
     public string? Gender { get; set; }
@@ -58,8 +55,14 @@ public class ChangePetViewModel(Window changePetWindow) : ObservableObject
         var list = await _ownerManager.GetOwners();
         if (list is not null)
         {
-            list.ForEach(o => OwnerList.Add(o));
-            //OwnerList = list;
+            list.ForEach(OwnerList.Add);
         }
     }
+
+    public ICommand ViewLoadedCommand => new RelayCommand(async () => {
+        await GetOwners();
+    });
+
+    private PetMenager _petMenager = new();
+    private OwnerManager _ownerManager = new();
 }

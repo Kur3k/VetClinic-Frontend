@@ -5,13 +5,6 @@ namespace Projekt.Model;
 
 public class Owner : ObservableObject
 {
-    private string _name;
-    private string _surname;
-    private string _phoneNumber;
-    private Address _address; 
-
-    private int _id;
-
     public int Id
     {
         get => _id;
@@ -89,4 +82,10 @@ public class Owner : ObservableObject
     {
        return $"{_name} {_surname}, Phone: {_phoneNumber}, Address: {_address}";
     }
+
+    private string _name;
+    private string _surname;
+    private string _phoneNumber;
+    private Address _address;
+    private int _id;
 }
